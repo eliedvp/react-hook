@@ -1,14 +1,19 @@
 import React from "react";
-import MovieCard from "./MovieCard"; // vérifie le nom ici
+import MovieCard from "./MovieCard";
+import { useNavigate } from "react-router-dom";
 
 const MovieList = ({ movies }) => {
+  const navigate = useNavigate();
+
   return (
-    <div style={{ display: "flex", flexWrap: "wrap" }}>
+    <div className="movie-list grid">
       {movies.map((movie, index) => (
-        <MovieCard key={index} movie={movie} />
+        <div key={index} style={{ cursor: "pointer" }} onClick={() => navigate(`/movie/${encodeURIComponent(movie.title)}`)}>
+          <MovieCard movie={movie} />
+        </div>
       ))}
     </div>
   );
 };
 
-export default MovieList; // bien exporter le composant
+export default MovieList;
